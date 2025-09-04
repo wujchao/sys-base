@@ -7,7 +7,7 @@ package sys_user
 import (
 	"context"
 
-	"sys-base/api/sys_user/v1"
+	"github.com/wujchao/sys-base/api/sys_user/v1"
 )
 
 type ISysUserV1 interface {

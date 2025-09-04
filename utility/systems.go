@@ -6,12 +6,12 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/util/gconv"
+	"github.com/wujchao/sys-base/consts"
+	"github.com/wujchao/sys-base/internal/model"
 	"golang.org/x/crypto/bcrypt"
 	"regexp"
 	"strings"
 	"sync"
-	"sys-base/consts"
-	"sys-base/internal/model"
 )
 
 func EncodeRuleApi(item ghttp.RouterItem) string {

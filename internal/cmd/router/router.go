@@ -3,7 +3,7 @@ package router
 import (
 	"context"
 	"github.com/gogf/gf/v2/net/ghttp"
-	"sys-base/service"
+	"github.com/wujchao/sys-base/service"
 )
 
 func LoadRouter(ctx context.Context, group *ghttp.RouterGroup) {

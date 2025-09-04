@@ -7,7 +7,7 @@ package sys_user_oneself
 import (
 	"context"
 
-	"sys-base/api/sys_user_oneself/v1"
+	"github.com/wujchao/sys-base/api/sys_user_oneself/v1"
 )
 
 type ISysUserOneselfV1 interface {

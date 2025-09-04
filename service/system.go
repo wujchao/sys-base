@@ -7,9 +7,9 @@ package service
 
 import (
 	"context"
-	v1 "sys-base/api/sys_login/v1"
-	"sys-base/internal/model"
-	"sys-base/internal/model/entity"
+	v1 "github.com/wujchao/sys-base/api/sys_login/v1"
+	"github.com/wujchao/sys-base/internal/model"
+	"github.com/wujchao/sys-base/internal/model/entity"
 
 	"github.com/gogf/gf/v2/database/gdb"
 )

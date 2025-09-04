@@ -7,12 +7,12 @@ import (
 	"github.com/gogf/gf/v2/os/gfile"
 	"github.com/gogf/gf/v2/os/gtime"
 	"github.com/gogf/gf/v2/util/guid"
+	"github.com/wujchao/sys-base/consts"
+	"github.com/wujchao/sys-base/internal/model"
+	"github.com/wujchao/sys-base/service"
 	"os"
 	"path"
 	"strings"
-	"sys-base/consts"
-	"sys-base/internal/model"
-	"sys-base/service"
 )
 
 type sFile struct {

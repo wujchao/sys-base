@@ -7,7 +7,7 @@ package sys_setting
 import (
 	"context"
 
-	"sys-base/api/sys_setting/v1"
+	"github.com/wujchao/sys-base/api/sys_setting/v1"
 )
 
 type ISysSettingV1 interface {

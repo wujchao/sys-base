@@ -5,7 +5,7 @@
 package dao
 
 import (
-	"sys-base/internal/dao/internal"
+	"github.com/wujchao/sys-base/internal/dao/internal"
 )
 
 // internalSysThirdPartyUserDao is internal type for wrapping internal DAO implements.

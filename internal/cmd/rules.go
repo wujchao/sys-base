@@ -7,10 +7,10 @@ import (
 	"github.com/gogf/gf/v2/os/gfile"
 	"github.com/gogf/gf/v2/util/gconv"
 	"github.com/gogf/gf/v2/util/gmeta"
+	"github.com/wujchao/sys-base/internal/dao"
+	"github.com/wujchao/sys-base/utility"
 	"reflect"
 	"strings"
-	"sys-base/internal/dao"
-	"sys-base/utility"
 )
 
 type rule struct {

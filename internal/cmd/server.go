@@ -8,11 +8,11 @@ import (
 	"github.com/gogf/gf/v2/os/gbuild"
 	"github.com/gogf/gf/v2/os/gfile"
 	"github.com/gogf/gf/v2/util/gmode"
+	"github.com/wujchao/sys-base/internal/cmd/router"
+	"github.com/wujchao/sys-base/internal/logic/middleware"
+	"github.com/wujchao/sys-base/service"
 	"os"
 	"path"
-	"sys-base/internal/cmd/router"
-	"sys-base/internal/logic/middleware"
-	"sys-base/service"
 	"syscall"
 )
 

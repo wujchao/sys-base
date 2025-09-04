@@ -3,8 +3,8 @@ package permission
 import (
 	"context"
 	"github.com/gogf/gf/v2/frame/g"
+	"github.com/wujchao/sys-base/consts"
 	"sync"
-	"sys-base/consts"
 )
 
 var permissionApis = sync.Map{}

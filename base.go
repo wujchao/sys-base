@@ -9,11 +9,11 @@ import (
 	"context"
 	"fmt"
 	"github.com/gogf/gf/v2/net/ghttp"
+	"github.com/wujchao/sys-base/internal/cmd"
 	"os"
 	"os/signal"
-	"sys-base/internal/cmd"
 
-	_ "sys-base/internal/logic"
+	_ "github.com/wujchao/sys-base/internal/logic"
 	"syscall"
 
 	_ "github.com/gogf/gf/contrib/nosql/redis/v2"

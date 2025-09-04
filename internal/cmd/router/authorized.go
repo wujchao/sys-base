@@ -3,10 +3,10 @@ package router
 import (
 	"context"
 	"github.com/gogf/gf/v2/net/ghttp"
-	"sys-base/internal/controller/sys_admin"
-	"sys-base/internal/controller/sys_role"
-	"sys-base/internal/controller/sys_setting"
-	"sys-base/internal/controller/sys_user"
+	"github.com/wujchao/sys-base/internal/controller/sys_admin"
+	"github.com/wujchao/sys-base/internal/controller/sys_role"
+	"github.com/wujchao/sys-base/internal/controller/sys_setting"
+	"github.com/wujchao/sys-base/internal/controller/sys_user"
 )
 
 func authRoute(ctx context.Context, group *ghttp.RouterGroup) {

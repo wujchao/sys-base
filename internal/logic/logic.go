@@ -5,11 +5,11 @@
 package logic
 
 import (
-	_ "sys-base/internal/logic/captcha"
-	_ "sys-base/internal/logic/content"
-	_ "sys-base/internal/logic/file"
-	_ "sys-base/internal/logic/middleware"
-	_ "sys-base/internal/logic/permiss"
-	_ "sys-base/internal/logic/system"
-	_ "sys-base/internal/logic/token"
+	_ "github.com/wujchao/sys-base/internal/logic/captcha"
+	_ "github.com/wujchao/sys-base/internal/logic/content"
+	_ "github.com/wujchao/sys-base/internal/logic/file"
+	_ "github.com/wujchao/sys-base/internal/logic/middleware"
+	_ "github.com/wujchao/sys-base/internal/logic/permiss"
+	_ "github.com/wujchao/sys-base/internal/logic/system"
+	_ "github.com/wujchao/sys-base/internal/logic/token"
 )

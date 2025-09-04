@@ -7,7 +7,7 @@ package service
 
 import (
 	"context"
-	"sys-base/internal/model"
+	"github.com/wujchao/sys-base/internal/model"
 
 	"github.com/gogf/gf/v2/net/ghttp"
 )

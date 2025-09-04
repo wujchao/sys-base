@@ -7,7 +7,7 @@ package sys_admin
 import (
 	"context"
 
-	"sys-base/api/sys_admin/v1"
+	"github.com/wujchao/sys-base/api/sys_admin/v1"
 )
 
 type ISysAdminV1 interface {

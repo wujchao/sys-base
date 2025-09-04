@@ -7,7 +7,7 @@ package sys_doc
 import (
 	"context"
 
-	"sys-base/api/sys_doc/v1"
+	"github.com/wujchao/sys-base/api/sys_doc/v1"
 )
 
 type ISysDocV1 interface {

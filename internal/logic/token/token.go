@@ -9,8 +9,8 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/util/guid"
+	"github.com/wujchao/sys-base/service"
 	"strings"
-	"sys-base/service"
 )
 
 type sToken struct {

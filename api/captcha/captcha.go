@@ -7,7 +7,7 @@ package captcha
 import (
 	"context"
 
-	"sys-base/api/captcha/v1"
+	"github.com/wujchao/sys-base/api/captcha/v1"
 )
 
 type ICaptchaV1 interface {

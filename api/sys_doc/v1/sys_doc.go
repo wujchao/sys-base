@@ -2,7 +2,7 @@ package v1
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
-	"sys-base/internal/model"
+	"github.com/wujchao/sys-base/internal/model"
 )
 
 type SysDocReadReq struct {

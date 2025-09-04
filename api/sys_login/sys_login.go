@@ -7,7 +7,7 @@ package sys_login
 import (
 	"context"
 
-	"sys-base/api/sys_login/v1"
+	"github.com/wujchao/sys-base/api/sys_login/v1"
 )
 
 type ISysLoginV1 interface {

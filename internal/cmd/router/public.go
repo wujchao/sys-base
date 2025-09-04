@@ -3,11 +3,11 @@ package router
 import (
 	"context"
 	"github.com/gogf/gf/v2/net/ghttp"
-	"sys-base/internal/controller/captcha"
-	"sys-base/internal/controller/sys_doc"
-	"sys-base/internal/controller/sys_login"
-	"sys-base/internal/controller/sys_third_party_login"
-	"sys-base/internal/controller/sys_upload"
+	"github.com/wujchao/sys-base/internal/controller/captcha"
+	"github.com/wujchao/sys-base/internal/controller/sys_doc"
+	"github.com/wujchao/sys-base/internal/controller/sys_login"
+	"github.com/wujchao/sys-base/internal/controller/sys_third_party_login"
+	"github.com/wujchao/sys-base/internal/controller/sys_upload"
 )
 
 func publicRoute(ctx context.Context, group *ghttp.RouterGroup) {

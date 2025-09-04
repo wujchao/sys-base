@@ -7,7 +7,7 @@ package sys_role
 import (
 	"context"
 
-	"sys-base/api/sys_role/v1"
+	"github.com/wujchao/sys-base/api/sys_role/v1"
 )
 
 type ISysRoleV1 interface {

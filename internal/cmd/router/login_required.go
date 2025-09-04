@@ -3,8 +3,8 @@ package router
 import (
 	"context"
 	"github.com/gogf/gf/v2/net/ghttp"
-	"sys-base/internal/controller/sys_oneself"
-	"sys-base/internal/controller/sys_user_oneself"
+	"github.com/wujchao/sys-base/internal/controller/sys_oneself"
+	"github.com/wujchao/sys-base/internal/controller/sys_user_oneself"
 )
 
 func loginRoute(ctx context.Context, group *ghttp.RouterGroup) {

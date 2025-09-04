@@ -7,7 +7,7 @@ package sys_upload
 import (
 	"context"
 
-	"sys-base/api/sys_upload/v1"
+	"github.com/wujchao/sys-base/api/sys_upload/v1"
 )
 
 type ISysUploadV1 interface {

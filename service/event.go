@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	v1 "sys-base/api/sys_login/v1"
-	"sys-base/internal/model"
+	v1 "github.com/wujchao/sys-base/api/sys_login/v1"
+	"github.com/wujchao/sys-base/internal/model"
 )
 
 type (

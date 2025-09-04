@@ -2,9 +2,9 @@ package system
 
 import (
 	"context"
-	"sys-base/internal/dao"
-	"sys-base/internal/model"
-	"sys-base/service"
+	"github.com/wujchao/sys-base/internal/dao"
+	"github.com/wujchao/sys-base/internal/model"
+	"github.com/wujchao/sys-base/service"
 )
 
 type sSysDoc struct {

@@ -7,7 +7,7 @@ package sys_third_party_login
 import (
 	"context"
 
-	"sys-base/api/sys_third_party_login/v1"
+	"github.com/wujchao/sys-base/api/sys_third_party_login/v1"
 )
 
 type ISysThirdPartyLoginV1 interface {

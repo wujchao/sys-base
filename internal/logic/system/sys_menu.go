@@ -5,12 +5,12 @@ import (
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/util/gconv"
+	"github.com/wujchao/sys-base/consts"
+	"github.com/wujchao/sys-base/internal/dao"
+	"github.com/wujchao/sys-base/internal/model"
+	"github.com/wujchao/sys-base/service"
+	"github.com/wujchao/sys-base/utility"
 	"sort"
-	"sys-base/consts"
-	"sys-base/internal/dao"
-	"sys-base/internal/model"
-	"sys-base/service"
-	"sys-base/utility"
 )
 
 type sSysMenu struct {
