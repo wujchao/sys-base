@@ -1,4 +1,4 @@
-module sys-base
+module github.com/wujchao/sys-base
 
 go 1.22.4
 
