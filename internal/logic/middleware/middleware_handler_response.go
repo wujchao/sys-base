@@ -5,6 +5,7 @@ import (
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
+	"github.com/gogf/gf/v2/util/gconv"
 	"net/http"
 	"strings"
 )
@@ -67,4 +68,6 @@ func HandlerResponse(r *ghttp.Request) {
 		Message: msg,
 		Data:    res,
 	})
+
+	r.Response.Header().Set("Content-Length", gconv.String(r.Response.BufferLength()))
 }

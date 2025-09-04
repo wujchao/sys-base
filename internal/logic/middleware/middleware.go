@@ -7,11 +7,12 @@ import (
 	"github.com/gogf/gf/v2/i18n/gi18n"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/net/gtrace"
+	"github.com/gogf/gf/v2/util/gconv"
 	"regexp"
 	"strings"
 	"sys-base/consts"
 	"sys-base/service"
-	"sys-base/utility/gcasbin"
+	"sys-base/utility/permission"
 )
 
 type sMiddleware struct {
@@ -46,25 +47,47 @@ func (s *sMiddleware) I18n(r *ghttp.Request) {
 
 // Auth 前台系统权限控制，用户必须登录才能访问
 func (s *sMiddleware) Auth(r *ghttp.Request) {
-	r.Middleware.Next()
+	if err := service.Token().TokenAuth(r); err != nil {
+		r.SetCtxVar("Exit", true)
+		r.Response.WriteJsonExit(errorRes(403, g.I18n().T(r.Context(), "无权限")))
+		r.ExitAll()
+		return
+	} else {
+		r.Middleware.Next()
+	}
 }
 
-// Permission 权限
+// UserPermission 用户访问端权限，用户端的url必须以 /api/v[版本号]/user 开头
+func (s *sMiddleware) UserPermission(r *ghttp.Request) {
+	match, err := regexp.MatchString(`^/?api/v[1-9]\d*/user`, r.RequestURI)
+	if err != nil || !match {
+		r.Response.WriteJsonExit(errorRes(403, g.I18n().T(r.Context(), "无权限")))
+		return
+	} else {
+		r.Middleware.Next()
+	}
+}
+
+// Permission 管理端&租户端权限
 func (s *sMiddleware) Permission(r *ghttp.Request) {
-	re := regexp.MustCompile(consts.ApiVersionRegex)
-	url := re.ReplaceAllString(r.RequestURI, "")
-	e := gcasbin.GetCasbin()
-	ok, err := e.Enforcer.Enforce("admin", url, r.Method)
-	g.Dump(ok)
-	if err != nil {
-		r.Response.WriteJsonExit(errorRes(500, err.Error()))
+	user := service.Context().GetLoginUser(r.GetCtx())
+	if user == nil {
+		r.Response.WriteJsonExit(errorRes(403, g.I18n().T(r.Context(), "无权限")))
 		return
 	}
-	if !ok {
-		r.Response.WriteJsonExit(errorRes(403, g.I18n().T(r.Context(), "Permission denied")))
+	if user.IsAdmin == 1 {
+		r.Middleware.Next()
 		return
+	} else {
+		if !permission.CheckPermission(user.Id, r.RequestURI) {
+			isExit := r.GetCtxVar("Exit").Bool()
+			if !isExit {
+				r.Response.WriteJsonExit(errorRes(403, g.I18n().T(r.Context(), "无权限")))
+			}
+			return
+		}
+		r.Middleware.Next()
 	}
-	r.Middleware.Next()
 }
 
 // MiddlewareCORS 跨域处理
@@ -119,9 +142,9 @@ func (s *sMiddleware) DirectResponse(r *ghttp.Request) {
 	}
 	// 如果是直接返回
 	_, ok := service.Context().GetData(r.GetCtx(), consts.DirectKey)
-	g.Log().Debug(r.GetCtx(), "DirectResponse", ok)
 	if ok {
 		r.Response.WriteJsonExit(r.GetHandlerResponse())
+		r.Response.Header().Set("Content-Length", gconv.String(r.Response.BufferLength()))
 		return
 	}
 }

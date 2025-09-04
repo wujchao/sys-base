@@ -16,7 +16,7 @@ import (
 	"syscall"
 )
 
-func RunServer(ctx context.Context, stopSignal chan os.Signal) *ghttp.Server {
+func RunServer(ctx context.Context, s *ghttp.Server, stopSignal chan os.Signal) {
 
 	// 性能分析
 	enablePProf := g.Cfg().MustGet(context.Background(), "pprofEnabled").Bool()
@@ -24,10 +24,11 @@ func RunServer(ctx context.Context, stopSignal chan os.Signal) *ghttp.Server {
 		RunSysPProf(stopSignal)
 	}
 
-	s := g.Server()
 	// 静态目录，vue项目
-	if gfile.Exists("/resource/dist/dist-pro/") {
-		s.SetServerRoot("/resource/dist/dist-pro/")
+	frontDir := g.Cfg().MustGet(ctx, "server.frontend").String()
+	if frontDir != "" && gfile.Exists(frontDir) {
+		fmt.Println("Start frontend serve")
+		s.SetServerRoot(frontDir)
 	}
 
 	// 统一返回
@@ -39,7 +40,7 @@ func RunServer(ctx context.Context, stopSignal chan os.Signal) *ghttp.Server {
 	// 操作日志
 	s.Use(service.Middleware().OperationLog)
 	// 关闭打印路由
-	//s.SetDumpRouterMap(false)
+	s.SetDumpRouterMap(g.Cfg().MustGet(ctx, "server.dumpRouterMap").Bool())
 	// 自定义Swig文档
 	if g.Cfg().MustGet(ctx, "swagger.custom").Bool() {
 		customOpenApiDoc(s)
@@ -91,5 +92,5 @@ func RunServer(ctx context.Context, stopSignal chan os.Signal) *ghttp.Server {
 		}()
 	}()
 
-	return s
+	return
 }

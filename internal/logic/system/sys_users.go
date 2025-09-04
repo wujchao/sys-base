@@ -95,15 +95,19 @@ func (s *sSysUsers) ListWithRole(ctx context.Context, users []*model.UserOutput)
 	return nil
 }
 func (s *sSysUsers) Read(ctx context.Context, id string) (out *model.UserOutput, err error) {
+	user := new(entity.SysUsers)
 	err = dao.SysUsers.Ctx(ctx).Handler(service.Permiss().DataPermission(ctx)).
 		Where(dao.SysUsers.Columns().Id, id).
-		Scan(&out)
+		Scan(&user)
 
 	if err != nil {
 		return nil, gerror.NewCode(consts.SystemErrCode)
 	}
-	if out == nil {
+	if user == nil {
 		return nil, gerror.NewCode(consts.DataNotFoundErrCode, g.I18n().T(ctx, "用户不存在"))
+	}
+	if err = gconv.Scan(user, &out); err != nil {
+		return nil, err
 	}
 	err = dao.SysRole.Ctx(ctx).
 		WhereIn(dao.SysRole.Columns().Id, dao.SysUsersRole.Ctx(ctx).
@@ -114,13 +118,22 @@ func (s *sSysUsers) Read(ctx context.Context, id string) (out *model.UserOutput,
 	if err != nil && !errors.Is(err, sql.ErrNoRows) {
 		return nil, err
 	}
+	// 密码状态
+	out.PassType = 1
+	if user.UserPassword == "" {
+		out.PassType = 2
+	}
 	return
 }
 
 func (s *sSysUsers) Add(ctx context.Context, input *model.UserInput) (id string, err error) {
 	loginUser := service.Context().GetLoginUser(ctx)
 	// 权限检查
-	if err := s.checkAddPermissions(loginUser, input); err != nil {
+	if err := s.checkAddPermissions(loginUser, &model.CheckPermissionsInput{
+		OrgId:     input.OrgId,
+		UserTypes: input.UserTypes,
+		IsAdmin:   input.IsAdmin,
+	}); err != nil {
 		return "", err
 	}
 
@@ -196,7 +209,11 @@ func (s *sSysUsers) Edit(ctx context.Context, in *model.UserEditInput) (err erro
 		return gerror.NewCode(consts.DataNotFoundErrCode, g.I18n().T(ctx, "用户不存在"))
 	}
 	// 权限检查
-	if err := s.checkAddPermissions(loginUser, in); err != nil {
+	if err := s.checkAddPermissions(loginUser, &model.CheckPermissionsInput{
+		OrgId:     in.OrgId,
+		UserTypes: nil,
+		IsAdmin:   in.IsAdmin,
+	}); err != nil {
 		return err
 	}
 
@@ -221,7 +238,7 @@ func (s *sSysUsers) Edit(ctx context.Context, in *model.UserEditInput) (err erro
 	// 开启事务
 	err = dao.SysUsers.Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
 		// 更新用户信息
-		_, err = dao.SysUsers.Ctx(ctx).TX(tx).Data(updateUser).Where(dao.SysUsers.Columns().Id, in.Id).Update()
+		_, err = dao.SysUsers.Ctx(ctx).TX(tx).Data(updateUser).OmitEmptyData().Where(dao.SysUsers.Columns().Id, in.Id).Update()
 		if err != nil {
 			return err
 		}
@@ -277,11 +294,7 @@ func (s *sSysUsers) userBindRole(ctx context.Context, tx gdb.TX, userId string, 
 	return nil
 }
 
-func (s *sSysUsers) checkAddPermissions(actionUser *model.ContextUser, in any) error {
-	var checkUser *model.CheckPermissionsInput
-	if err := gconv.Struct(in, &checkUser); err != nil {
-		return err
-	}
+func (s *sSysUsers) checkAddPermissions(actionUser *model.ContextUser, checkUser *model.CheckPermissionsInput) error {
 	// 系统端
 	if utility.IsSystemUser(actionUser) {
 		// 系统端管理员
@@ -296,7 +309,7 @@ func (s *sSysUsers) checkAddPermissions(actionUser *model.ContextUser, in any) e
 	}
 	// 企业端
 	// 1、不能添加系统端用户
-	if checkUser.OrgId != "" || *checkUser.UserTypes != consts.UserTypeOrg {
+	if checkUser.OrgId != "" || (checkUser.UserTypes != nil && *checkUser.UserTypes != consts.UserTypeOrg) {
 		return gerror.NewCode(consts.ParamsInvalidErrCode)
 	}
 	// 2、非管理员不能添加管理员
@@ -388,7 +401,8 @@ func (s *sSysUsers) ChanPassSelf(ctx context.Context, in *model.UserSelfChanPass
 	if err = dao.SysUsers.Ctx(ctx).Where("id", userId).Scan(&user); err != nil {
 		return
 	}
-	if !utility.PasswordVerify([]byte(in.OldPassword), []byte(user.UserPassword)) {
+
+	if user.UserPassword != "" && !utility.PasswordVerify([]byte(in.OldPassword), []byte(user.UserPassword)) {
 		return gerror.NewCode(consts.ParamsInvalidErrCode, g.I18n().T(ctx, "旧密码错误"))
 	}
 	_, err = dao.SysUsers.Ctx(ctx).Where("id", userId).Data(g.Map{

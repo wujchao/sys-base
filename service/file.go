@@ -14,6 +14,7 @@ type (
 	IFile interface {
 		// Upload 上传文件
 		Upload(ctx context.Context, in model.FileUploadInput) (*model.FileUploadOutput, error)
+		DownloadImage(ctx context.Context, url string) (out *model.FileUploadOutput, err error)
 	}
 )
 

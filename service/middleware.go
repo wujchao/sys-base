@@ -17,7 +17,9 @@ type (
 		I18n(r *ghttp.Request)
 		// Auth 前台系统权限控制，用户必须登录才能访问
 		Auth(r *ghttp.Request)
-		// Permission 权限
+		// UserPermission 用户访问端权限，用户端的url必须以 /api/v[版本号]/user 开头
+		UserPermission(r *ghttp.Request)
+		// Permission 管理端&租户端权限
 		Permission(r *ghttp.Request)
 		// MiddlewareCORS 跨域处理
 		MiddlewareCORS(r *ghttp.Request)

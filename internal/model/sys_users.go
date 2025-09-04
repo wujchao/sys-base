@@ -52,6 +52,7 @@ type UserOutput struct {
 	CreatedBy     uint64           `json:"createdBy"     orm:"created_by"      ` // 创建者
 	CreatedAt     *gtime.Time      `json:"createdAt"     orm:"created_at"      ` // 创建日期
 	UpdatedAt     *gtime.Time      `json:"updatedAt"     orm:"updated_at"      ` // 修改日期
+	PassType      int              `json:"passType"      orm:"pass_type"`        // 密码状态 1 正常， 2 空密码，可直接设置，3 密码过期，必须修改
 	Roles         []*SysRoleOutput `json:"roles" dc:"角色" orm:"with:id=sys_users_role.user_id;sys_users_role.role_id=roles.id"`
 }
 
@@ -81,7 +82,6 @@ type UserInput struct {
 type UserEditInput struct {
 	Id           string   `json:"id"            description:"Id" v:"required#ID不能为空"`
 	OrgId        string   `json:"orgId"         description:"OrgId" v:"required#orgId不能为空"          ` // 企业ID
-	UserName     string   `json:"userName"      description:"用户名"`
 	Mobile       string   `json:"mobile"        description:"中国手机不带国家代码，国际手机号格式为：国家代码-手机号"`
 	UserNickname string   `json:"userNickname"  description:"用户昵称"`
 	UserPassword string   `json:"userPassword"  description:"登录密码"`
@@ -116,6 +116,7 @@ type UserSelfOutput struct {
 	CreatedBy     string           `json:"createdBy"     orm:"created_by"      ` // 创建者
 	CreatedAt     *gtime.Time      `json:"createdAt"     orm:"created_at"      ` // 创建日期
 	UpdatedAt     *gtime.Time      `json:"updatedAt"     orm:"updated_at"      ` // 修改日期
+	PassType      int              `json:"passType"      orm:"pass_type"`        // 密码状态 1 正常， 2 空密码，可直接设置，3 密码过期，必须修改
 	Roles         []*SysRoleOutput `json:"roles"      description:"角色数组" v:"required#角色不能为空"`
 }
 

@@ -20,8 +20,7 @@ func init() {
 }
 
 func (s *sContext) Init(r *ghttp.Request) {
-	ctx := r.GetNeverDoneCtx()
-	r.SetCtx(ctx)
+	ctx := r.GetCtx()
 	// 获取登录用户
 	user := &model.ContextUser{}
 	err := service.Token().GetCurUser(ctx, user)

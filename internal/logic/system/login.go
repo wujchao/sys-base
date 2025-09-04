@@ -50,12 +50,12 @@ func (s *sLogin) Login(ctx context.Context, in *v1.LoginDoReq) (res *v1.LoginDoR
 		return
 	}
 
-	if err = s.checkStatus(ctx, userInfo); err != nil {
+	if err = s.CheckStatus(ctx, userInfo); err != nil {
 		// 用户信息错误，登录失败
 		loginStatus, loginMsg = 3, err.Error()
 		return nil, err
 	}
-	if err = s.checkOrg(ctx, userInfo.OrgId); err != nil {
+	if err = s.CheckOrg(ctx, userInfo.OrgId); err != nil {
 		// 租户信息错误，登录失败
 		loginStatus, loginMsg = 4, err.Error()
 		return nil, err
@@ -85,8 +85,8 @@ func (s *sLogin) Login(ctx context.Context, in *v1.LoginDoReq) (res *v1.LoginDoR
 	return
 }
 
-// 状态检测
-func (s *sLogin) checkStatus(ctx context.Context, user *entity.SysUsers) (err error) {
+// CheckStatus 状态检测
+func (s *sLogin) CheckStatus(ctx context.Context, user *entity.SysUsers) (err error) {
 	if user.Status == 3 {
 		return gerror.NewCode(consts.AuthExpiredErrCode, g.I18n().T(ctx, "此帐户尚未验证"))
 	}
@@ -104,8 +104,8 @@ func (s *sLogin) checkStatus(ctx context.Context, user *entity.SysUsers) (err er
 	return err
 }
 
-// 企业检测
-func (s *sLogin) checkOrg(ctx context.Context, orgId string) (err error) {
+// CheckOrg 企业检测
+func (s *sLogin) CheckOrg(ctx context.Context, orgId string) (err error) {
 	if orgId == "" {
 		return nil
 	}

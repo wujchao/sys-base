@@ -17,8 +17,18 @@ import (
 type (
 	ILogin interface {
 		Login(ctx context.Context, in *v1.LoginDoReq) (res *v1.LoginDoRes, err error)
+		// CheckStatus 状态检测
+		CheckStatus(ctx context.Context, user *entity.SysUsers) (err error)
+		// CheckOrg 企业检测
+		CheckOrg(ctx context.Context, orgId string) (err error)
 		CheckPwdErrorCount(ctx context.Context, username string) (err error)
 		Logout(ctx context.Context) (err error)
+	}
+	IRegister interface {
+		Register(ctx context.Context, in *model.RegisterInput) (out *model.LoginOutput, err error)
+	}
+	ISysDoc interface {
+		Read(ctx context.Context, key string) (out *model.SysDocOutput, err error)
 	}
 	ISysLoginLog interface {
 		Add(ctx context.Context, params *model.LoginLogParams)
@@ -44,6 +54,11 @@ type (
 		// AddWithTx 事务关联角色权限
 		AddWithTx(ctx context.Context, tx gdb.TX, ruleIds []string, roleId string) error
 	}
+	IThirdPartyLogin interface {
+		WxLogin(ctx context.Context, in *model.WechatLoginResponse) (out *model.WechatLoginOutput, err error)
+		Login(ctx context.Context, in *model.ThirdPartyLoginInput) (out *model.ThirdPartyLoginOutput, err error)
+		Register(ctx context.Context, in *model.ThirdPartyRegisterInput) (out *model.ThirdPartyLoginOutput, err error)
+	}
 	ISysUsers interface {
 		ListOneself(ctx context.Context, in *model.UserListParams) (out *model.UserListOutput, err error)
 		ListWithRole(ctx context.Context, users []*model.UserOutput) (err error)
@@ -60,12 +75,15 @@ type (
 )
 
 var (
-	localLogin       ILogin
-	localSysLoginLog ISysLoginLog
-	localSysMenu     ISysMenu
-	localSysRole     ISysRole
-	localSysRules    ISysRules
-	localSysUsers    ISysUsers
+	localLogin           ILogin
+	localRegister        IRegister
+	localSysDoc          ISysDoc
+	localSysLoginLog     ISysLoginLog
+	localSysMenu         ISysMenu
+	localSysRole         ISysRole
+	localSysRules        ISysRules
+	localThirdPartyLogin IThirdPartyLogin
+	localSysUsers        ISysUsers
 )
 
 func Login() ILogin {
@@ -77,6 +95,28 @@ func Login() ILogin {
 
 func RegisterLogin(i ILogin) {
 	localLogin = i
+}
+
+func Register() IRegister {
+	if localRegister == nil {
+		panic("implement not found for interface IRegister, forgot register?")
+	}
+	return localRegister
+}
+
+func RegisterRegister(i IRegister) {
+	localRegister = i
+}
+
+func SysDoc() ISysDoc {
+	if localSysDoc == nil {
+		panic("implement not found for interface ISysDoc, forgot register?")
+	}
+	return localSysDoc
+}
+
+func RegisterSysDoc(i ISysDoc) {
+	localSysDoc = i
 }
 
 func SysLoginLog() ISysLoginLog {
@@ -121,6 +161,17 @@ func SysRules() ISysRules {
 
 func RegisterSysRules(i ISysRules) {
 	localSysRules = i
+}
+
+func ThirdPartyLogin() IThirdPartyLogin {
+	if localThirdPartyLogin == nil {
+		panic("implement not found for interface IThirdPartyLogin, forgot register?")
+	}
+	return localThirdPartyLogin
+}
+
+func RegisterThirdPartyLogin(i IThirdPartyLogin) {
+	localThirdPartyLogin = i
 }
 
 func SysUsers() ISysUsers {
