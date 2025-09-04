@@ -8,14 +8,14 @@ import (
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/util/gconv"
-	"sys-base/consts"
-	"sys-base/internal/dao"
-	"sys-base/internal/model"
-	"sys-base/internal/model/do"
-	"sys-base/internal/model/entity"
-	"sys-base/service"
-	"sys-base/utility"
-	"sys-base/utility/gxid"
+	"github.com/wujchao/sys-base/consts"
+	"github.com/wujchao/sys-base/internal/dao"
+	"github.com/wujchao/sys-base/internal/model"
+	"github.com/wujchao/sys-base/internal/model/do"
+	"github.com/wujchao/sys-base/internal/model/entity"
+	"github.com/wujchao/sys-base/service"
+	"github.com/wujchao/sys-base/utility"
+	"github.com/wujchao/sys-base/utility/gxid"
 )
 
 type sSysUsers struct {

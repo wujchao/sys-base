@@ -2,9 +2,9 @@ package sys_role
 
 import (
 	"context"
-	"sys-base/service"
+	"github.com/wujchao/sys-base/service"
 
-	"sys-base/api/sys_role/v1"
+	"github.com/wujchao/sys-base/api/sys_role/v1"
 )
 
 func (c *ControllerV1) RoleList(ctx context.Context, req *v1.RoleListReq) (res *v1.RoleListRes, err error) {

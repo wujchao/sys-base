@@ -5,7 +5,7 @@
 package sys_oneself
 
 import (
-	"sys-base/api/sys_oneself"
+	"github.com/wujchao/sys-base/api/sys_oneself"
 )
 
 type ControllerV1 struct{}

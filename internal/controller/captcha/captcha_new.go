@@ -5,7 +5,7 @@
 package captcha
 
 import (
-	"sys-base/api/captcha"
+	"github.com/wujchao/sys-base/api/captcha"
 )
 
 type ControllerV1 struct{}

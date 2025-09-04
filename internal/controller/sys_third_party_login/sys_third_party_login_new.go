@@ -5,7 +5,7 @@
 package sys_third_party_login
 
 import (
-	"sys-base/api/sys_third_party_login"
+	"github.com/wujchao/sys-base/api/sys_third_party_login"
 )
 
 type ControllerV1 struct{}

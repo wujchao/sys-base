@@ -5,7 +5,7 @@
 package sys_login
 
 import (
-	"sys-base/api/sys_login"
+	"github.com/wujchao/sys-base/api/sys_login"
 )
 
 type ControllerV1 struct{}

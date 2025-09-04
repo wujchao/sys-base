@@ -2,13 +2,13 @@ package sys_upload
 
 import (
 	"context"
-	"sys-base/consts"
-	"sys-base/internal/model"
-	"sys-base/service"
+	"github.com/wujchao/sys-base/consts"
+	"github.com/wujchao/sys-base/internal/model"
+	"github.com/wujchao/sys-base/service"
 
 	"github.com/gogf/gf/v2/errors/gerror"
 
-	"sys-base/api/sys_upload/v1"
+	"github.com/wujchao/sys-base/api/sys_upload/v1"
 )
 
 func (c *ControllerV1) FileUpload(ctx context.Context, req *v1.FileUploadReq) (res *v1.FileUploadRes, err error) {

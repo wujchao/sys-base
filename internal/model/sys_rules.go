@@ -1,6 +1,6 @@
 package model
 
-import "sys-base/internal/model/entity"
+import "github.com/wujchao/sys-base/internal/model/entity"
 
 type SysRulesOutput struct {
 	*entity.SysRules

@@ -3,8 +3,8 @@ package permiss
 import (
 	"context"
 	"github.com/gogf/gf/v2/database/gdb"
-	"sys-base/service"
-	"sys-base/utility"
+	"github.com/wujchao/sys-base/service"
+	"github.com/wujchao/sys-base/utility"
 )
 
 type sPermiss struct {

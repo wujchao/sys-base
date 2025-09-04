@@ -5,7 +5,7 @@
 package sys_role
 
 import (
-	"sys-base/api/sys_role"
+	"github.com/wujchao/sys-base/api/sys_role"
 )
 
 type ControllerV1 struct{}

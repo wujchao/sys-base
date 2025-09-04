@@ -2,9 +2,9 @@ package captcha
 
 import (
 	"context"
-	"sys-base/service"
+	"github.com/wujchao/sys-base/service"
 
-	"sys-base/api/captcha/v1"
+	"github.com/wujchao/sys-base/api/captcha/v1"
 )
 
 func (c *ControllerV1) CaptchaIndex(ctx context.Context, req *v1.CaptchaIndexReq) (res *v1.CaptchaIndexRes, err error) {

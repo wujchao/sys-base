@@ -5,7 +5,7 @@
 package sys_setting
 
 import (
-	"sys-base/api/sys_setting"
+	"github.com/wujchao/sys-base/api/sys_setting"
 )
 
 type ControllerV1 struct{}

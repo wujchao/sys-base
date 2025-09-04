@@ -5,7 +5,7 @@
 package sys_admin
 
 import (
-	"sys-base/api/sys_admin"
+	"github.com/wujchao/sys-base/api/sys_admin"
 )
 
 type ControllerV1 struct{}

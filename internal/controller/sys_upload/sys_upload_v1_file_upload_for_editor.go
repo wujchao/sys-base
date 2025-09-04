@@ -3,11 +3,11 @@ package sys_upload
 import (
 	"context"
 	"github.com/gogf/gf/v2/frame/g"
-	"sys-base/consts"
-	"sys-base/internal/model"
-	"sys-base/service"
+	"github.com/wujchao/sys-base/consts"
+	"github.com/wujchao/sys-base/internal/model"
+	"github.com/wujchao/sys-base/service"
 
-	"sys-base/api/sys_upload/v1"
+	"github.com/wujchao/sys-base/api/sys_upload/v1"
 )
 
 func (c *ControllerV1) FileUploadForEditor(ctx context.Context, req *v1.FileUploadForEditorReq) (res *v1.FileUploadForEditorRes, err error) {

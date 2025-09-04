@@ -6,11 +6,11 @@ import (
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/util/gconv"
-	"sys-base/consts"
-	"sys-base/internal/model"
-	"sys-base/service"
+	"github.com/wujchao/sys-base/consts"
+	"github.com/wujchao/sys-base/internal/model"
+	"github.com/wujchao/sys-base/service"
 
-	"sys-base/api/sys_third_party_login/v1"
+	"github.com/wujchao/sys-base/api/sys_third_party_login/v1"
 )
 
 func (c *ControllerV1) WxLogin(ctx context.Context, req *v1.WxLoginReq) (res *v1.WxLoginRes, err error) {

@@ -2,9 +2,9 @@ package sys_oneself
 
 import (
 	"context"
-	"sys-base/service"
+	"github.com/wujchao/sys-base/service"
 
-	"sys-base/api/sys_oneself/v1"
+	"github.com/wujchao/sys-base/api/sys_oneself/v1"
 )
 
 func (c *ControllerV1) OneselfRulesTree(ctx context.Context, req *v1.OneselfRulesTreeReq) (res *v1.OneselfRulesTreeRes, err error) {

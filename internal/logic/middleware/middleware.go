@@ -8,11 +8,11 @@ import (
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/net/gtrace"
 	"github.com/gogf/gf/v2/util/gconv"
+	"github.com/wujchao/sys-base/consts"
+	"github.com/wujchao/sys-base/service"
+	"github.com/wujchao/sys-base/utility/permission"
 	"regexp"
 	"strings"
-	"sys-base/consts"
-	"sys-base/service"
-	"sys-base/utility/permission"
 )
 
 type sMiddleware struct {

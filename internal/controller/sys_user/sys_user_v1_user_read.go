@@ -2,9 +2,9 @@ package sys_user
 
 import (
 	"context"
-	"sys-base/service"
+	"github.com/wujchao/sys-base/service"
 
-	"sys-base/api/sys_user/v1"
+	"github.com/wujchao/sys-base/api/sys_user/v1"
 )
 
 func (c *ControllerV1) UserRead(ctx context.Context, req *v1.UserReadReq) (res *v1.UserReadRes, err error) {

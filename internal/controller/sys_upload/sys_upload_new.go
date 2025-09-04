@@ -5,7 +5,7 @@
 package sys_upload
 
 import (
-	"sys-base/api/sys_upload"
+	"github.com/wujchao/sys-base/api/sys_upload"
 )
 
 type ControllerV1 struct{}

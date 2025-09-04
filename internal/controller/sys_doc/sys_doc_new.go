@@ -5,7 +5,7 @@
 package sys_doc
 
 import (
-	"sys-base/api/sys_doc"
+	"github.com/wujchao/sys-base/api/sys_doc"
 )
 
 type ControllerV1 struct{}

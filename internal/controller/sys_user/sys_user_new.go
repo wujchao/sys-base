@@ -5,7 +5,7 @@
 package sys_user
 
 import (
-	"sys-base/api/sys_user"
+	"github.com/wujchao/sys-base/api/sys_user"
 )
 
 type ControllerV1 struct{}
